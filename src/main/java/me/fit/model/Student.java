@@ -28,7 +28,17 @@ public class Student {
     @JsonIgnore
     private List<Course> courses = new ArrayList<>();
 
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<TimezoneInfo> timezoneInfos = new ArrayList<>();
 
+    public List<TimezoneInfo> getTimezoneInfos() {
+        return timezoneInfos;
+    }
+
+    public void setTimezoneInfos(List<TimezoneInfo> timezoneInfos) {
+        this.timezoneInfos = timezoneInfos;
+    }
 
     public List<Course> getCourses() {
         return courses;
