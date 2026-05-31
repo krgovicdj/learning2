@@ -1,8 +1,14 @@
 package me.fit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
+@NamedQuery(name="Instructor.findAll",query = "select s from Instructor s")
+@NamedQuery(name="Instructor.findById",query = "select s from Instructor s where id=:id")
 public class Instructor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,8 +17,19 @@ public class Instructor {
     private String lastName;
     private String email;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="profile_id",referencedColumnName = "id")
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "instructor")
+    private List<Course> courses=new ArrayList<>();
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 
     public Long getId() {
         return id;
