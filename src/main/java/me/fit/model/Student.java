@@ -32,6 +32,10 @@ public class Student {
     @JsonIgnore
     private List<TimezoneInfo> timezoneInfos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<CurrencyInfo> currencies = new ArrayList<>();
+
     public List<TimezoneInfo> getTimezoneInfos() {
         return timezoneInfos;
     }
@@ -86,6 +90,14 @@ public class Student {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public List<CurrencyInfo> getCurrencies() {
+        return currencies;
+    }
+
+    public void setCurrencies(List<CurrencyInfo> currencies) {
+        this.currencies = currencies;
     }
 
     public Student() {
