@@ -21,7 +21,6 @@ public class Course {
     private Instructor instructor;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
-    @JsonIgnore
     private List<Lesson> lessons = new ArrayList<>();
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

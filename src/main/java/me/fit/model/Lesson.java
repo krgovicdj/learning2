@@ -3,6 +3,10 @@ package me.fit.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 //@NamedQuery(name="Lesson.findAll",query = "select s from Lesson s")
 //@NamedQuery(name ="Lesson.findById",query = "select s from Lesson s where id=:id")
@@ -18,6 +22,21 @@ public class Lesson {
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @JsonIgnore
     private Course course;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "lesson_files",
+            joinColumns = @JoinColumn(name = "lesson_id"),
+            inverseJoinColumns = @JoinColumn(name = "file_id")
+    )
+    private List<UploadedFile> uploadedFiles=new ArrayList<>();
+
+    public List<UploadedFile> getUploadedFiles() {
+        return uploadedFiles;
+    }
+
+    public void setUploadedFiles(List<UploadedFile> uploadedFiles) {
+        this.uploadedFiles = uploadedFiles;
+    }
 
     public Course getCourse() {
         return course;
