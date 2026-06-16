@@ -11,7 +11,7 @@ public class StudentCountScheduler {
     @Inject
     EntityManager em;
 
-    @Scheduled(every = "15s")
+    @Scheduled(every = "60s")
     void logStudentCount() {
         Long studentCount = em.createQuery("SELECT COUNT(s) FROM Student s", Long.class).getSingleResult();
         System.out.println("[SCHEDULER] Students in dattabase: " + studentCount + " | time: " + java.time.LocalDateTime.now());

@@ -1,9 +1,10 @@
 package me.fit.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Profile {
@@ -12,6 +13,17 @@ public class Profile {
     private Long id;
     private String name;
     private String bio;
+    @ManyToMany
+    @JsonIgnore
+    private List<UploadedFile2> uploadedfiles=new ArrayList<>();
+
+    public List<UploadedFile2> getUploadedfiles() {
+        return uploadedfiles;
+    }
+
+    public void setUploadedfiles(List<UploadedFile2> uploadedfiles) {
+        this.uploadedfiles = uploadedfiles;
+    }
 
     public String getName() {
         return name;

@@ -7,6 +7,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import me.fit.model.Lesson;
+import me.fit.model.Profile;
 import me.fit.model.UploadedFile;
 import org.jboss.resteasy.reactive.multipart.FileUpload;
 
@@ -20,6 +21,7 @@ import java.nio.file.StandardCopyOption;
 @ApplicationScoped
 public class FileUploadService {
     private static final String UPLOAD_DIRECTORY = "uploads/lessons/";
+    private static final String UPLOAD_DIRECTORY2 = "uploads/profiles/";
     @Inject
     EntityManager em;
     @Transactional
@@ -77,4 +79,5 @@ public class FileUploadService {
         }
         return lesson;
     }
+
 }
